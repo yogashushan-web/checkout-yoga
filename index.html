@@ -6,6 +6,25 @@
     <title>רכישת הקורס - התחלה מדויקת</title>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1448149729783570');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1448149729783570&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -194,9 +213,8 @@
             <h2>רכישת הקורס</h2>
 
             <div class="price-display">
-                <div class="original-price" id="originalPrice">₪400</div>
-                <div class="current-price" id="currentPrice">₪220</div>
-                <div class="price-note">גישה מלאה לכל החיים + ליווי אישי</div>
+                <div class="current-price" id="currentPrice">₪550</div>
+                <div class="price-note">גישה ללא הגבלת זמן לכל החומרים + קבוצת וואטסאפ פרטית</div>
             </div>
 
             <!-- מייל -->
@@ -221,7 +239,7 @@
                     <div class="feature-icon">🎓</div>
                     <div class="feature-text">
                         <h3>6 שיעורים מוקלטים</h3>
-                        <p>גישה מלאה לכל החיים</p>
+                        <p>גישה ללא הגבלת זמן</p>
                     </div>
                 </div>
                 <div class="feature-item">
@@ -250,6 +268,12 @@
 
     <footer>
         <p>© 2026 שרון שושן - התחלה מדויקת</p>
+        <p style="margin-top: 10px; font-size: 13px;">
+            <a href="https://landingpageyogac.netlify.app/terms.html" style="color: rgba(255,255,255,0.8); text-decoration: underline;">תנאי שימוש ומדיניות פרטיות</a>
+        </p>
+        <p style="margin-top: 12px; font-size: 11px; opacity: 0.7;">
+            * התוכן מנוסח בלשון נקבה מטעמי נוחות, אך הקורס פונה למורים ומורות יוגה כאחד.
+        </p>
     </footer>
 
     <script>
@@ -258,8 +282,8 @@
         const { createClient } = supabase;
         const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        const BASE_PRICE = 220;
-        let finalPrice = 220;
+        const BASE_PRICE = 550;
+        let finalPrice = 550;
         let appliedCode = null;
 
         async function applyDiscount() {
@@ -313,6 +337,13 @@
                 emailInput.focus();
                 return;
             }
+            
+            // 🔥 Facebook Pixel - InitiateCheckout
+            fbq('track', 'InitiateCheckout', {
+                value: finalPrice,
+                currency: 'ILS',
+                content_name: 'קורס התחלה מדויקת'
+            });
             
             btn.disabled = true;
             btn.textContent = 'יוצרת תשלום...';

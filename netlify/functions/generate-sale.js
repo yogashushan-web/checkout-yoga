@@ -17,7 +17,7 @@ exports.handler = async (event) => {
 
     try {
         const body = JSON.parse(event.body || '{}');
-        const priceInAgorot = (body.price || 220) * 100;
+        const priceInAgorot = (body.price || 550) * 100;
         const buyerEmail = body.email || '';
         
         // Build return URL with email parameter
